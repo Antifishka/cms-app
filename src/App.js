@@ -1,15 +1,48 @@
-import React, { lazy } from 'react';
-import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect, useState, startTransition  } from 'react';
+import { Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import tabs from './tabs.json';
 
+const DummyTable = lazy(() => import('./components/DummyTable.js'));
+
 const App = () => {
+    const navigate = useNavigate();
+    const [defaultTab, setDefaultTab] = useState(null);
+
+    useEffect(() => {
+        startTransition(() => {
+            // Отримайте поточний ідентифікатор вкладки з URL
+            const currentTabId = window.location.pathname.replace('/', '');
+            console.log(currentTabId, 'currentTabId');
+
+            // Перевірте, чи поточний ідентифікатор вкладки дійсний та існує в масиві вкладок
+            const tabExists = tabs.some(tab => tab.id === currentTabId);
+            console.log(tabExists, 'tabExists');
+
+            // Якщо поточний ідентифікатор вкладки є дійсним, встановіть його як вкладку за замовчуванням
+            if (tabExists) {
+                setDefaultTab(currentTabId);
+            } else {
+                // Якщо поточний ідентифікатор вкладки недійсний, перенаправте на першу вкладку
+                navigate(`/${tabs[0].id}`);
+            }
+        });
+    }, [navigate]);
+    
     return (
         <>
             <Routes>
-                <Route path="/" element={<Navigate to={`/${tabs[0].id}`} />} />
+                <Route path="/" element={<Navigate to={`/${defaultTab || tabs[0].id}`} />} />
 
                 {tabs.map(tab => (
-                <Route key={tab.id} path={`/${tab.id}`} element={lazy(() => import(`${tab.path}`))}  />
+                    <Route
+                        key={tab.id}
+                        path={`/${tab.id}`}
+                        element={
+                            <Suspense fallback={<div>Loading...</div>}>
+                                {tab.id === 'dummyTable' && <DummyTable />}
+                            </Suspense>
+                        }
+                    />
                 ))}
             </Routes>
 
