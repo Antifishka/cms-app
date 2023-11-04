@@ -2,31 +2,36 @@ import React, { lazy, Suspense, useEffect, useState, startTransition  } from 're
 import { Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import tabs from './tabs.json';
 
+const DummyList = lazy(() => import('./components/DummyList.js'));
 const DummyTable = lazy(() => import('./components/DummyTable.js'));
+const DummyChart = lazy(() => import('./components/DummyChart.js'));
 
 const App = () => {
     const navigate = useNavigate();
     const [defaultTab, setDefaultTab] = useState(null);
 
-    useEffect(() => {
-        startTransition(() => {
-            // Отримайте поточний ідентифікатор вкладки з URL
-            const currentTabId = window.location.pathname.replace('/', '');
-            console.log(currentTabId, 'currentTabId');
+    // useEffect(() => {
+    //     startTransition(() => {
+    //         // Отримайте поточний ідентифікатор вкладки з URL
+    //         const current = window.location.pathname;
+    //         console.log(current, 'current');
 
-            // Перевірте, чи поточний ідентифікатор вкладки дійсний та існує в масиві вкладок
-            const tabExists = tabs.some(tab => tab.id === currentTabId);
-            console.log(tabExists, 'tabExists');
+    //         const currentTabId = window.location.pathname.replace('/', '');
+    //         console.log(currentTabId, 'currentTabId');
 
-            // Якщо поточний ідентифікатор вкладки є дійсним, встановіть його як вкладку за замовчуванням
-            if (tabExists) {
-                setDefaultTab(currentTabId);
-            } else {
-                // Якщо поточний ідентифікатор вкладки недійсний, перенаправте на першу вкладку
-                navigate(`/${tabs[0].id}`);
-            }
-        });
-    }, [navigate]);
+    //         // Перевірте, чи поточний ідентифікатор вкладки дійсний та існує в масиві вкладок
+    //         const tabExists = tabs.some(tab => tab.id === currentTabId);
+    //         console.log(tabExists, 'tabExists');
+
+    //         // Якщо поточний ідентифікатор вкладки є дійсним, встановіть його як вкладку за замовчуванням
+    //         if (tabExists) {
+    //             setDefaultTab(currentTabId);
+    //         } else {
+    //             // Якщо поточний ідентифікатор вкладки недійсний, перенаправте на першу вкладку
+    //             navigate(`/${tabs[0].id}`);
+    //         }
+    //     });
+    // }, [navigate]);
     
     return (
         <>
@@ -39,7 +44,9 @@ const App = () => {
                         path={`/${tab.id}`}
                         element={
                             <Suspense fallback={<div>Loading...</div>}>
+                                {tab.id === 'dummyList' && <DummyList />}
                                 {tab.id === 'dummyTable' && <DummyTable />}
+                                {tab.id === 'dummyChart' && <DummyChart />}
                             </Suspense>
                         }
                     />
