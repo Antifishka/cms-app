@@ -1,6 +1,7 @@
 import React, { lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout.jsx';
+import { GlobalStyle } from './globalStyles/globalStyle';
 import tabs from './tabs.json';
 
 const App = () => {
@@ -20,6 +21,8 @@ const App = () => {
                     <Route path="*" element={<div>Page not found</div> } />
                 </Route>
             </Routes>
+
+            <GlobalStyle />
         </>
     );
 };

@@ -1,5 +1,5 @@
 [
-  { "id": "dummyTable", "title": "Dummy Table", "order": 1, "path": "./components/DummyTable.jsx" },
+  { "id": "dummyTable", "title": "Dummy Table", "order": 1, "path": "./components/DummyTable/DummyTable.jsx" },
   { "id": "dummyChart", "title": "Dummy Chart", "order": 2, "path": "./components/DummyChart.jsx" },
   { "id": "dummyList", "title": "Dummy List", "order": 0, "path": "./components/DummyList.jsx" }
 ]  

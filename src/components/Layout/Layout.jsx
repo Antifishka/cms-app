@@ -1,25 +1,26 @@
 import React, { Suspense } from "react";
-import { Outlet, NavLink, } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Container, Header, Link, Main } from "./Layout.styled";
 
 const Layout = ({ tabs }) => {
     return (
-        <>
-            <header>
+        <Container>
+            <Header>
                 <nav>
                     { tabs.map(tab => (
-                        <NavLink key={tab.id} to={tab.id}>
+                        <Link key={tab.id} to={tab.id}>
                             {tab.title}
-                        </NavLink>
+                        </Link>
                     ))}
                 </nav>
-            </header>
+            </Header>
 
             <Suspense fallback={<div>Loading..</div>}>
-                <main>
+                <Main>
                     <Outlet/>
-                </main>
+                </Main>
             </Suspense>
-        </>
+        </Container>
     )
 }
 
