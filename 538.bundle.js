@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcms_app=self.webpackChunkcms_app||[]).push([[538],{538:(e,t,a)=>{a.r(t),a.d(t,{default:()=>u});var n=a(294);const u=function(){return n.createElement(n.Fragment,null,n.createElement("h2",null,"Dummy Chart Page"))}}}]);
