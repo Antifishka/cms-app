@@ -11,17 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-  "chart.js": "2.9.4",
-  "react": "^18.2.0",
-  "react-chartjs-2": "^2.11.2",
-  "react-dom": "^18.2.0",
-  "react-router-dom": "^6.18.0"
-},
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.18.0",
+    "styled-components": "^6.1.0"
+  },
   "devDependencies": {
-    "@babel/core": "^7.14.8",
+    "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.14.8",
     "@babel/preset-react": "^7.14.5",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.3.0",
     "html-webpack-plugin": "^5.5.3",
     "webpack": "^5.55.0",
     "webpack-cli": "^4.8.0",
